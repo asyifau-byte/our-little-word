@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💛</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff176, #64b5f6, #1565c0);
+    padding: 20px;
+}
+
+/* Kartu */
+.card {
+    width: 100%;
+    max-width: 420px;
+    padding: 35px 25px;
+    text-align: center;
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    z-index: 2;
+    animation: muncul 1.5s ease;
+}
+
+h1 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #fff176;
+}
+
+/* Tulisan ucapan */
+#pesan {
+    color: white;
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    background: #ffeb3b;
+    color: #1565c0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px #fff176;
+}
+
+/* Love putih */
+.heart {
+    position: fixed;
+    bottom: -50px;
+    color: white;
+    font-size: 25px;
+    text-shadow: 0 0 12px white;
+    animation: terbang linear forwards;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes terbang {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes muncul {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Tampilan HP */
+@media (max-width: 480px) {
+    .card {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    #pesan {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>For You 💛</h1>
+
+    <p id="pesan"></p>
+
+    <button id="tombol" onclick="tampilkanPesan()">
+        Buka Pesan 🤍
+    </button>
+
+</div>
+
+<script>
+
+// Kata-kata dari kamu
+const ucapan =
+"Sorryy sayanggg kaloo akuuu adaa salahhh, akuuu kangenn bangett samaa kamuuu, akuuu harappp kamuu baikk baikk sajaaa, kalooo adaaa masalahh ceritaa keee akuuu kitaa kan haruss selalu berkomunikasii, semogaa tuhan selalu melingdungimuu 🤍";
+
+// Animasi mengetik
+function tampilkanPesan() {
+    const teks = document.getElementById("pesan");
+    const tombol = document.getElementById("tombol");
+
+    tombol.style.display = "none";
+    teks.textContent = "";
+
+    let i = 0;
+
+    function mengetik() {
+        if (i < ucapan.length) {
+            teks.textContent += ucapan.charAt(i);
+            i++;
+            setTimeout(mengetik, 65);
+        }
+    }
+
+    mengetik();
+}
+
+// Animasi love putih berterbangan
+function buatHati() {
+    const hati = document.createElement("div");
+
+    hati.className = "heart";
+    hati.textContent = "🤍";
+
+    hati.style.left = Math.random() * 100 + "vw";
+    hati.style.fontSize = (15 + Math.random() * 25) + "px";
+    hati.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(hati);
+
+    setTimeout(() => {
+        hati.remove();
+    }, 9000);
+}
+
+setInterval(buatHati, 400);
+
+</script>
+
+</body>
+</html>
